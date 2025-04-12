@@ -1,6 +1,7 @@
 {
     "name": "euro-million-electron",
     "version": "1.0.0",
+    "author": "Giovanni Farina <:dgiofar@giofar.dev>",
     "description": "An Electron application that generates random numbers for the Euromillion lottery game",
     "main": "index.js",
     "scripts": {
@@ -22,7 +23,7 @@
         "appId": "com.euromillion.generator",
         "productName": "Euromillion Number Generator",
         "directories": {
-            "output": "dist"
+            "output": "dist/${os}"
         },
         "forceCodeSigning": false,
         "files": [
@@ -32,14 +33,21 @@
             "build/**/*",
             "node_modules/**/*"
         ],
+        "extraFiles": [],
         "win": {
-            "target": ["nsis", "portable"]
+            "icon": "icons/Euromillion-logo.ico",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": ["x64", "ia32"]
+                },
+                "portable"
+            ]
         },
-        "mac": {
-            "target": ["dmg", "zip"]
-        },
-        "linux": {
-            "target": ["AppImage", "deb"]
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "deleteAppDataOnUninstall": true
         },
         "asar": true,
         "publish": null

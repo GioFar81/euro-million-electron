@@ -4,14 +4,14 @@ An Electron application that generates random numbers for the Euromillion lotter
 
 ## Features
 
-- Generate 1 to 5 lines of Euromillion numbers
-- Each line contains 5 unique numbers (1-50) and 2 lucky stars (1-12)
+- Generate one to five lines of Euromillion numbers
+- Each line contains five unique numbers (1–50) and two lucky stars (1–12)
 - Numbers are displayed in ascending order
 - Simple and intuitive user interface
 - Theme switching:
-  - Light mode
-  - Dark mode
-  - System preference (automatically matches your system's theme)
+    - Light mode
+    - Dark mode
+    - System preference (automatically matches your system's theme)
 
 ## Installation
 
@@ -32,16 +32,16 @@ This application can be built for Windows, macOS, and Linux platforms.
 ### Build Commands
 
 Build for all platforms (where possible):
-```
-npm run build
-```
+
+`npm run build`
 
 Build for specific platforms:
-```
-npm run build:win    # Build for Windows
-npm run build:mac    # Build for macOS (requires macOS)
-npm run build:linux  # Build for Linux
-```
+
+`npm run build:win`     Build for Windows
+
+`npm run build:mac`     Build for macOS (requires macOS)
+
+`npm run build:linux`   Build for Linux
 
 The built applications will be available in the `dist` directory.
 
@@ -54,11 +54,13 @@ The built applications will be available in the `dist` directory.
 ## Development
 
 This project follows the gitflow workflow:
+
 - `master` branch contains production-ready code
 - `develop` branch is used for development
 - Feature branches are created from `develop` for new features
 
 ### Code Structure
+
 - `index.html`: Main HTML file
 - `styles.css`: CSS styles for the application
 - `index.js`: Electron application entry point

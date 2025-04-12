@@ -5,6 +5,7 @@
 # Exclude entire .idea directory
 .idea/
 
+
 # User-specific stuff (kept for reference)
 #.idea/**/workspace.xml
 #.idea/**/tasks.xml
