@@ -22,6 +22,11 @@ This project follows the gitflow workflow:
 - `develop` branch is used for development
 - Feature branches are created from `develop` for new features
 
+### Code Structure
+- `index.html`: Main HTML file
+- `styles.css`: CSS styles for the application
+- `index.js`: Electron application entry point
+
 ## License
 
 This project is private and not licensed for public use.

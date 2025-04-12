@@ -1,17 +1,17 @@
 {
-  "name": "euro-million-electron",
-  "version": "1.0.0",
-  "description": "An Electron application that generates random numbers for the Euromillion lottery game",
-  "main": "index.js",
-  "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "private": true,
-  "devDependencies": {
-    "electron": "^28.0.0"
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  }
+    "name": "euro-million-electron",
+    "version": "1.0.0",
+    "description": "An Electron application that generates random numbers for the Euromillion lottery game",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "private": true,
+    "devDependencies": {
+        "electron": "^28.0.0"
+    },
+    "dependencies": {
+        "electron-squirrel-startup": "^1.0.0"
+    }
 }

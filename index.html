@@ -1,174 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Euromillion Number Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .results {
-            margin-top: 20px;
-        }
-        .line {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 4px;
-            border-left: 4px solid #4CAF50;
-        }
-        .numbers, .stars {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-        .number, .star {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            border-radius: 50%;
-            font-weight: bold;
-        }
-        .number {
-            background-color: #e0e0e0;
-            color: #333;
-        }
-        .star {
-            background-color: #FFD700;
-            color: #333;
-        }
-        .line-label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Euromillion Number Generator</h1>
-    <div class="container">
-        <div class="form-group">
-            <label for="lineCount">How many lines do you want to play?</label>
-            <select id="lineCount">
-                <option value="1">1 Line</option>
-                <option value="2">2 Lines</option>
-                <option value="3">3 Lines</option>
-                <option value="4">4 Lines</option>
-                <option value="5">5 Lines</option>
-            </select>
+    <head>
+        <meta charset="UTF-8">
+        <title>Euromillion Number Generator</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Euromillion Number Generator</h1>
+        <div class="container">
+            <div class="form-group">
+                <label for="lineCount">How many lines do you want to play?</label>
+                <select id="lineCount">
+                    <option value="1">1 Line</option>
+                    <option value="2">2 Lines</option>
+                    <option value="3">3 Lines</option>
+                    <option value="4">4 Lines</option>
+                    <option value="5">5 Lines</option>
+                </select>
+            </div>
+            <button id="generateBtn">Generate Numbers</button>
+            <div id="results" class="results"></div>
         </div>
-        <button id="generateBtn">Generate Numbers</button>
-        <div id="results" class="results"></div>
-    </div>
 
-    <script>
-        // Function to generate random unique numbers
-        function generateUniqueNumbers(min, max, count) {
-            const numbers = new Set();
-            while (numbers.size < count) {
-                numbers.add(Math.floor(Math.random() * (max - min + 1)) + min);
+        <script>
+            // Function to generate random unique numbers
+            function generateUniqueNumbers(min, max, count) {
+                const numbers = new Set();
+                while (numbers.size < count) {
+                    numbers.add(Math.floor(Math.random() * (max - min + 1)) + min);
+                }
+                return Array.from(numbers).sort((a, b) => a - b);
             }
-            return Array.from(numbers).sort((a, b) => a - b);
-        }
 
-        // Function to generate Euromillion numbers
-        function generateEuromillionNumbers() {
-            const numbers = generateUniqueNumbers(1, 50, 5);
-            const stars = generateUniqueNumbers(1, 12, 2);
-            return { numbers, stars };
-        }
-
-        // Function to display the generated numbers
-        function displayResults(lineCount) {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '';
-
-            for (let i = 0; i < lineCount; i++) {
-                const { numbers, stars } = generateEuromillionNumbers();
-                
-                const lineDiv = document.createElement('div');
-                lineDiv.className = 'line';
-                
-                const lineLabel = document.createElement('div');
-                lineLabel.className = 'line-label';
-                lineLabel.textContent = `Line ${i + 1}`;
-                lineDiv.appendChild(lineLabel);
-                
-                const numbersDiv = document.createElement('div');
-                numbersDiv.className = 'numbers';
-                numbers.forEach(num => {
-                    const numberSpan = document.createElement('span');
-                    numberSpan.className = 'number';
-                    numberSpan.textContent = num;
-                    numbersDiv.appendChild(numberSpan);
-                });
-                lineDiv.appendChild(numbersDiv);
-                
-                const starsDiv = document.createElement('div');
-                starsDiv.className = 'stars';
-                stars.forEach(star => {
-                    const starSpan = document.createElement('span');
-                    starSpan.className = 'star';
-                    starSpan.textContent = star;
-                    starsDiv.appendChild(starSpan);
-                });
-                lineDiv.appendChild(starsDiv);
-                
-                resultsDiv.appendChild(lineDiv);
+            // Function to generate Euromillion numbers
+            function generateEuromillionNumbers() {
+                const numbers = generateUniqueNumbers(1, 50, 5);
+                const stars = generateUniqueNumbers(1, 12, 2);
+                return { numbers, stars };
             }
-        }
 
-        // Event listener for the generate button
-        document.getElementById('generateBtn').addEventListener('click', () => {
-            const lineCount = parseInt(document.getElementById('lineCount').value);
-            displayResults(lineCount);
-        });
+            // Function to display the generated numbers
+            function displayResults(lineCount) {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
 
-        // Generate initial results
-        displayResults(1);
-    </script>
-</body>
+                for (let i = 0; i < lineCount; i++) {
+                    const { numbers, stars } = generateEuromillionNumbers();
+
+                    const lineDiv = document.createElement('div');
+                    lineDiv.className = 'line';
+
+                    const lineLabel = document.createElement('div');
+                    lineLabel.className = 'line-label';
+                    lineLabel.textContent = `Line ${i + 1}`;
+                    lineDiv.appendChild(lineLabel);
+
+                    const numbersDiv = document.createElement('div');
+                    numbersDiv.className = 'numbers';
+                    numbers.forEach(num => {
+                        const numberSpan = document.createElement('span');
+                        numberSpan.className = 'number';
+                        numberSpan.textContent = num;
+                        numbersDiv.appendChild(numberSpan);
+                    });
+                    lineDiv.appendChild(numbersDiv);
+
+                    const starsDiv = document.createElement('div');
+                    starsDiv.className = 'stars';
+                    stars.forEach(star => {
+                        const starSpan = document.createElement('span');
+                        starSpan.className = 'star';
+                        starSpan.textContent = star;
+                        starsDiv.appendChild(starSpan);
+                    });
+                    lineDiv.appendChild(starsDiv);
+
+                    resultsDiv.appendChild(lineDiv);
+                }
+            }
+
+            // Event listener for the generate button
+            document.getElementById('generateBtn').addEventListener('click', () => {
+                const lineCount = parseInt(document.getElementById('lineCount').value);
+                displayResults(lineCount);
+            });
+
+            // Generate initial results
+            displayResults(1);
+        </script>
+    </body>
 </html>
