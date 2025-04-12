@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -20,7 +20,9 @@ const createWindow = () => {
     });
 
     // and load the index.html of the app.
-    mainWindow.loadFile(path.join(__dirname, "index.html"));
+    mainWindow.loadFile(path.join(__dirname, "index.html")).then(() => {
+        // Successfully loaded the file (optional handling can be added here)
+    });
 
     // Open the DevTools in development mode
     // mainWindow.webContents.openDevTools();

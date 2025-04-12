@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Euromillion Number Generator</title>
@@ -62,7 +62,7 @@
                 }
             }
 
-            // Initialize theme from saved preference or default to system
+            // Initialize the theme from saved preference or default to the system
             function initTheme() {
                 const savedTheme = localStorage.getItem(THEME_KEY) || 'system';
                 setTheme(savedTheme);
@@ -78,8 +78,8 @@
 
             // Listen for system theme changes
             if (window.matchMedia) {
-                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                    // Only update if system theme is selected
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    // Only update if the system theme is selected
                     if (localStorage.getItem(THEME_KEY) === 'system') {
                         setTheme('system');
                     }
@@ -145,7 +145,7 @@
                 }
             }
 
-            // Event listener for the generate button
+            // Event listener for the generated button
             document.getElementById('generateBtn').addEventListener('click', () => {
                 const lineCount = parseInt(document.getElementById('lineCount').value);
                 displayResults(lineCount);
