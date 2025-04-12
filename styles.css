@@ -1,21 +1,57 @@
+:root {
+    /* Light mode (default) */
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --container-bg: white;
+    --container-shadow: rgba(0, 0, 0, 0.1);
+    --line-bg: #f9f9f9;
+    --number-bg: #e0e0e0;
+    --number-color: #333;
+    --star-bg: #FFD700;
+    --star-color: #333;
+    --button-bg: #4CAF50;
+    --button-hover-bg: #45a049;
+    --button-text: white;
+    --select-border: #ddd;
+}
+
+[data-theme="dark"] {
+    --bg-color: #222;
+    --text-color: #f5f5f5;
+    --container-bg: #333;
+    --container-shadow: rgba(0, 0, 0, 0.3);
+    --line-bg: #444;
+    --number-bg: #555;
+    --number-color: #f5f5f5;
+    --star-bg: #FFD700;
+    --star-color: #333;
+    --button-bg: #4CAF50;
+    --button-hover-bg: #45a049;
+    --button-text: white;
+    --select-border: #555;
+}
+
 body {
     font-family: Arial, sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
-    color: #333;
+    color: var(--text-color);
     text-align: center;
 }
 
 .container {
-    background-color: white;
+    background-color: var(--container-bg);
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--container-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-group {
@@ -26,29 +62,33 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: var(--text-color);
 }
 
 select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--select-border);
     border-radius: 4px;
     font-size: 16px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
     width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--button-hover-bg);
 }
 
 .results {
@@ -58,9 +98,10 @@ button:hover {
 .line {
     margin-bottom: 15px;
     padding: 15px;
-    background-color: #f9f9f9;
+    background-color: var(--line-bg);
     border-radius: 4px;
-    border-left: 4px solid #4CAF50;
+    border-left: 4px solid var(--button-bg);
+    transition: background-color 0.3s ease;
 }
 
 .numbers, .stars {
@@ -77,19 +118,45 @@ button:hover {
     text-align: center;
     border-radius: 50%;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .number {
-    background-color: #e0e0e0;
-    color: #333;
+    background-color: var(--number-bg);
+    color: var(--number-color);
 }
 
 .star {
-    background-color: #FFD700;
-    color: #333;
+    background-color: var(--star-bg);
+    color: var(--star-color);
 }
 
 .line-label {
     font-weight: bold;
     margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.theme-option {
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border: 1px solid var(--select-border);
+    transition: all 0.3s ease;
+}
+
+.theme-option.active {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
 }

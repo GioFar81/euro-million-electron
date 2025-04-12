@@ -8,6 +8,10 @@ An Electron application that generates random numbers for the Euromillion lotter
 - Each line contains 5 unique numbers (1-50) and 2 lucky stars (1-12)
 - Numbers are displayed in ascending order
 - Simple and intuitive user interface
+- Theme switching:
+  - Light mode
+  - Dark mode
+  - System preference (automatically matches your system's theme)
 
 ## Installation
 
