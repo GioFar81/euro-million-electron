@@ -19,6 +19,38 @@ An Electron application that generates random numbers for the Euromillion lotter
 2. Install dependencies with `npm install`
 3. Start the application with `npm start`
 
+## Building for Distribution
+
+This application can be built for Windows, macOS, and Linux platforms.
+
+### Prerequisites
+
+- Node.js and npm installed
+- For macOS builds on non-macOS platforms: Not possible (Apple requires macOS for building macOS applications)
+- For Windows builds on non-Windows platforms: Wine installed
+
+### Build Commands
+
+Build for all platforms (where possible):
+```
+npm run build
+```
+
+Build for specific platforms:
+```
+npm run build:win    # Build for Windows
+npm run build:mac    # Build for macOS (requires macOS)
+npm run build:linux  # Build for Linux
+```
+
+The built applications will be available in the `dist` directory.
+
+### Build Outputs
+
+- **Windows**: NSIS installer (.exe) and portable (.exe)
+- **macOS**: DMG (.dmg) and ZIP (.zip)
+- **Linux**: AppImage (.AppImage) and Debian package (.deb)
+
 ## Development
 
 This project follows the gitflow workflow:
