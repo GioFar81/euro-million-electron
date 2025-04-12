@@ -82,3 +82,7 @@ fabric.properties
 
 # Exclude entire .junie directory
 .junie/
+
+# Node.js dependencies
+node_modules/
+package-lock.json
