@@ -50,6 +50,10 @@
             "deleteAppDataOnUninstall": true
         },
         "asar": true,
-        "publish": null
+        "publish": {
+            "provider": "github",
+            "owner": "GioFar81",
+            "repo": "euro-million-electron"
+        }
     }
 }

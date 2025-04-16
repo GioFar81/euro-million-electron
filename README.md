@@ -65,6 +65,62 @@ This project follows the gitflow workflow:
 - `styles.css`: CSS styles for the application
 - `index.js`: Electron application entry point
 
+## Continuous Integration
+
+This project uses GitHub Actions for continuous integration and automated builds:
+
+- Automated builds for Windows, macOS, and Linux
+- Builds are triggered on pushes to `master` and `develop` branches
+- Builds are also triggered on pull requests to these branches
+- Build artifacts are available for download from the GitHub Actions workflow
+
+To manually trigger a build, go to the Actions tab in the GitHub repository and select the "Build Application" workflow.
+
+## GitHub Releases
+
+This project uses GitHub Releases to publish new versions of the application:
+
+- Releases are automatically created when a new tag starting with 'v' is pushed
+- The release includes installers for Windows, macOS, and Linux
+- Release notes can be added to provide information about changes
+
+### Creating a New Release
+
+To create a new release:
+
+1. Update the version number in `package.json`
+2. Commit your changes to the repository
+3. Create and push a tag with the version number:
+
+```bash
+git tag v1.0.0  # Replace with your version number
+git push origin v1.0.0
+```
+
+4. The GitHub Actions workflow will automatically build the application and create a release
+5. Once completed, the release will be available in the "Releases" section of the GitHub repository
+
+### Adding Release Notes
+
+You can add release notes to document changes in each release:
+
+1. **Method 1: During Release Creation**
+   - After pushing a tag, go to the "Releases" section in your GitHub repository
+   - Edit the automatically created release
+   - Add release notes in the description field
+   - Click "Update release"
+
+2. **Method 2: Using a Release Notes File**
+   - Create a file named `RELEASE_NOTES.md` in your repository
+   - Add your release notes to this file before pushing the tag
+   - Update the release workflow to include these notes in the release
+
+Release notes should include:
+- New features
+- Bug fixes
+- Breaking changes
+- Upgrade instructions (if applicable)
+
 ## License
 
 This project is private and not licensed for public use.
