@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Euromillion Number Generator</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Euromillion Number Generator</h1>
+        <div class="theme-switcher">
+            <div class="theme-option" data-theme="light">Light Mode</div>
+            <div class="theme-option" data-theme="dark">Dark Mode</div>
+            <div class="theme-option" data-theme="system">System Preference</div>
+        </div>
+        <div class="container">
+            <div class="form-group">
+                <label for="lineCount">How many lines do you want to play?</label>
+                <select id="lineCount">
+                    <option value="1">1 Line</option>
+                    <option value="2">2 Lines</option>
+                    <option value="3">3 Lines</option>
+                    <option value="4">4 Lines</option>
+                    <option value="5">5 Lines</option>
+                </select>
+            </div>
+            <button id="generateBtn">Generate Numbers</button>
+            <div id="results" class="results"></div>
+        </div>
+
+        <script>
+            // Theme management
+            const themeOptions = document.querySelectorAll('.theme-option');
+            const THEME_KEY = 'euromillion-theme';
+
+            // Function to set theme
+            function setTheme(theme) {
+                // Remove any existing theme
+                document.body.removeAttribute('data-theme');
+
+                // Save theme preference to localStorage
+                localStorage.setItem(THEME_KEY, theme);
+
+                // Mark the active theme option
+                themeOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-theme') === theme) {
+                        option.classList.add('active');
+                    }
+                });
+
+                if (theme === 'system') {
+                    // Check system preference
+                    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        document.body.setAttribute('data-theme', 'dark');
+                    } else {
+                        // Default to light if system preference is not dark or not available
+                        document.body.setAttribute('data-theme', 'light');
+                    }
+                } else {
+                    // Set the selected theme
+                    document.body.setAttribute('data-theme', theme);
+                }
+            }
+
+            // Initialize the theme from saved preference or default to the system
+            function initTheme() {
+                const savedTheme = localStorage.getItem(THEME_KEY) || 'system';
+                setTheme(savedTheme);
+            }
+
+            // Add event listeners to theme options
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.getAttribute('data-theme');
+                    setTheme(theme);
+                });
+            });
+
+            // Listen for system theme changes
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    // Only update if the system theme is selected
+                    if (localStorage.getItem(THEME_KEY) === 'system') {
+                        setTheme('system');
+                    }
+                });
+            }
+
+            // Initialize theme
+            initTheme();
+
+            // Function to generate random unique numbers
+            function generateUniqueNumbers(min, max, count) {
+                const numbers = new Set();
+                while (numbers.size < count) {
+                    numbers.add(Math.floor(Math.random() * (max - min + 1)) + min);
+                }
+                return Array.from(numbers).sort((a, b) => a - b);
+            }
+
+            // Function to generate Euromillion numbers
+            function generateEuromillionNumbers() {
+                const numbers = generateUniqueNumbers(1, 50, 5);
+                const stars = generateUniqueNumbers(1, 12, 2);
+                return { numbers, stars };
+            }
+
+            // Function to display the generated numbers
+            function displayResults(lineCount) {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+
+                for (let i = 0; i < lineCount; i++) {
+                    const { numbers, stars } = generateEuromillionNumbers();
+
+                    const lineDiv = document.createElement('div');
+                    lineDiv.className = 'line';
+
+                    const lineLabel = document.createElement('div');
+                    lineLabel.className = 'line-label';
+                    lineLabel.textContent = `Line ${i + 1}`;
+                    lineDiv.appendChild(lineLabel);
+
+                    const numbersDiv = document.createElement('div');
+                    numbersDiv.className = 'numbers';
+                    numbers.forEach(num => {
+                        const numberSpan = document.createElement('span');
+                        numberSpan.className = 'number';
+                        numberSpan.textContent = num;
+                        numbersDiv.appendChild(numberSpan);
+                    });
+                    lineDiv.appendChild(numbersDiv);
+
+                    const starsDiv = document.createElement('div');
+                    starsDiv.className = 'stars';
+                    stars.forEach(star => {
+                        const starSpan = document.createElement('span');
+                        starSpan.className = 'star';
+                        starSpan.textContent = star;
+                        starsDiv.appendChild(starSpan);
+                    });
+                    lineDiv.appendChild(starsDiv);
+
+                    resultsDiv.appendChild(lineDiv);
+                }
+            }
+
+            // Event listener for the generated button
+            document.getElementById('generateBtn').addEventListener('click', () => {
+                const lineCount = parseInt(document.getElementById('lineCount').value);
+                displayResults(lineCount);
+            });
+
+            // Generate initial results
+            displayResults(1);
+        </script>
+    </body>
+</html>

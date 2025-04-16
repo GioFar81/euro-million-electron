@@ -1,10 +1,67 @@
 {
-  "name": "euro-million-electron",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "private": true
+    "name": "euro-million-electron",
+    "version": "1.0.0",
+    "author": "Giovanni Farina <:dgiofar@giofar.dev>",
+    "description": "An Electron application that generates random numbers for the Euromillion lottery game",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder build --publish never",
+        "build:win": "electron-builder build --win --publish never",
+        "build:mac": "electron-builder build --mac --publish never",
+        "build:linux": "electron-builder build --linux --publish never"
+    },
+    "private": true,
+    "devDependencies": {
+        "electron": "^35.1.5",
+        "electron-builder": "^26.0.13"
+    },
+    "dependencies": {
+        "electron-squirrel-startup": "^1.0.1"
+    },
+    "build": {
+        "appId": "com.euromillion.generator",
+        "productName": "Euromillion Number Generator",
+        "directories": {
+            "output": "dist/${os}"
+        },
+        "forceCodeSigning": false,
+        "files": [
+            "*.js",
+            "*.html",
+            "*.css",
+            "build/**/*",
+            "node_modules/**/*"
+        ],
+        "extraFiles": [],
+        "win": {
+            "icon": "icons/Euromillion-logo.ico",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": ["x64", "ia32"]
+                },
+                "portable"
+            ]
+        },
+        "linux": {
+            "icon": "icons/Euromillion-logo.png",
+            "target": ["AppImage", "deb"],
+            "category": "Utility"
+        },
+        "mac": {
+            "icon": "icons/Euromillion-logo.icns"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "deleteAppDataOnUninstall": true
+        },
+        "asar": true,
+        "publish": {
+            "provider": "github",
+            "owner": "GioFar81",
+            "repo": "euro-million-electron"
+        }
+    }
 }

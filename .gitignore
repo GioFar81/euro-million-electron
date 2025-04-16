@@ -5,6 +5,7 @@
 # Exclude entire .idea directory
 .idea/
 
+
 # User-specific stuff (kept for reference)
 #.idea/**/workspace.xml
 #.idea/**/tasks.xml
@@ -82,3 +83,9 @@ fabric.properties
 
 # Exclude entire .junie directory
 .junie/
+
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
