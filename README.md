@@ -73,6 +73,7 @@ This project uses GitHub Actions for continuous integration and automated builds
 - Builds are triggered on pushes to `master` and `develop` branches
 - Builds are also triggered on pull requests to these branches
 - Build artifacts are available for download from the GitHub Actions workflow
+- The `package-lock.json` file must be committed to the repository for GitHub Actions to work correctly
 
 To manually trigger a build, go to the Actions tab in the GitHub repository and select the "Build Application" workflow.
 
