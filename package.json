@@ -23,7 +23,7 @@
         "appId": "com.euromillion.generator",
         "productName": "Euromillion Number Generator",
         "directories": {
-            "output": "dist"
+            "output": "dist/${os}"
         },
         "forceCodeSigning": false,
         "files": [
@@ -44,15 +44,13 @@
                 "portable"
             ]
         },
-        "mac": {
-            "icon": "icons/Euromillion-logo.icns",
-            "target": ["dmg", "zip"],
-            "category": "public.app-category.utilities"
-        },
         "linux": {
-            "icon": "icons/Euromillion-logo.ico",
+            "icon": "icons/Euromillion-logo.png",
             "target": ["AppImage", "deb"],
             "category": "Utility"
+        },
+        "mac": {
+            "icon": "icons/Euromillion-logo.icns"
         },
         "nsis": {
             "oneClick": false,

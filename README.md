@@ -77,26 +77,6 @@ This project uses GitHub Actions for continuous integration and automated builds
 
 To manually trigger a build, go to the Actions tab in the GitHub repository and select the "Build Application" workflow.
 
-### Build Configuration
-
-The build configuration is defined in `package.json` under the `build` section:
-
-- **Windows**: Builds NSIS installer and portable executable
-- **macOS**: Builds DMG and ZIP packages
-- **Linux**: Builds AppImage and Debian package
-
-Each platform has specific configuration options, including icon paths and target formats. The build output is stored in the `dist` directory.
-
-#### Icon Requirements
-
-Different platforms have different requirements for application icons:
-
-- **Windows**: ICO format (`.ico`)
-- **macOS**: ICNS format (`.icns`) or high-resolution PNG (at least 512x512 pixels)
-- **Linux**: PNG or ICO format
-
-For macOS builds, the icon must be at least 512x512 pixels in size. If no specific icon is provided for macOS, the default Electron icon will be used.
-
 ## GitHub Releases
 
 This project uses GitHub Releases to publish new versions of the application:
@@ -141,32 +121,6 @@ Release notes should include:
 - Bug fixes
 - Breaking changes
 - Upgrade instructions (if applicable)
-
-## Troubleshooting
-
-### Build Issues
-
-If you encounter issues with the build process:
-
-1. **Missing Dependencies**
-   - Ensure all dependencies are installed with `npm ci` instead of `npm install`
-   - Check that you have the required system dependencies for electron-builder
-
-2. **Platform-Specific Issues**
-   - **Windows**: Ensure you have the correct Visual Studio build tools
-   - **macOS**: Building macOS apps requires a macOS system
-   - **Linux**: Ensure you have required dependencies like `fakeroot` and `dpkg`
-
-3. **GitHub Actions Failures**
-   - Check the workflow logs for specific error messages
-   - Verify that the artifact paths in the workflow files match the output directories in `package.json`
-   - Ensure all platform configurations are properly defined in `package.json`
-
-4. **Icon-Related Issues**
-   - For macOS: Ensure icons are at least 512x512 pixels and in ICNS or PNG format
-   - For Windows: Use ICO format for icons
-   - For Linux: PNG or ICO formats are supported
-   - If you encounter icon-related errors, consider using platform-specific icons or removing the icon property for problematic platforms
 
 ## License
 
