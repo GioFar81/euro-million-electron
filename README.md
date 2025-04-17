@@ -84,6 +84,7 @@ This project uses GitHub Releases to publish new versions of the application:
 - Releases are automatically created when a new tag starting with 'v' is pushed
 - The release includes installers for Windows, macOS, and Linux
 - Release notes can be added to provide information about changes
+- The workflow requires `contents: write` permission to create releases
 
 ### Creating a New Release
 

@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*' # This will trigger the workflow when you push a tag that starts with 'v'
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
