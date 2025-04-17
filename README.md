@@ -100,6 +100,9 @@ git push origin v1.0.0
 ```
 
 4. The GitHub Actions workflow will automatically build the application and create a release
+   - The workflow is triggered by the tag push event
+   - The workflow extracts the version number from the tag (removing the 'v' prefix)
+   - This version is used to name the release (e.g., "Release 1.0.0")
 5. Once completed, the release will be available in the "Releases" section of the GitHub repository
 
 ### Adding Release Notes
