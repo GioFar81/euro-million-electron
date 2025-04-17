@@ -105,6 +105,14 @@ git push origin v1.0.0
    - This version is used to name the release (e.g., "Release 1.0.0")
 5. Once completed, the release will be available in the "Releases" section of the GitHub repository
 
+> **Note:** If you've created a tag before updating the workflow file or if the workflow doesn't run, you may need to recreate and push the tag:
+> ```bash
+> git tag -d v1.0.0  # Delete the local tag
+> git push --delete origin v1.0.0  # Delete the remote tag
+> git tag v1.0.0  # Recreate the tag
+> git push origin v1.0.0  # Push the tag again
+> ```
+
 ### Adding Release Notes
 
 You can add release notes to document changes in each release:
