@@ -103,6 +103,7 @@ git push origin v1.0.0
    - The workflow is triggered by the tag push event
    - The workflow extracts the version number from the tag (removing the 'v' prefix)
    - This version is used to name the release (e.g., "Release 1.0.0")
+   - Only files matching the Euromillion naming pattern will be included in the release
 5. Once completed, the release will be available in the "Releases" section of the GitHub repository
 
 > **Note:** If you've created a tag before updating the workflow file or if the workflow doesn't run, you may need to recreate and push the tag:

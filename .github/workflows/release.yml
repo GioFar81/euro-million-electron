@@ -125,7 +125,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            artifacts/windows-build/**/*.exe
+            artifacts/windows-build/**/Euromillion*.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
@@ -141,7 +141,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            artifacts/windows-build/**/*.exe
+            artifacts/windows-build/**/Euromillion*.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
