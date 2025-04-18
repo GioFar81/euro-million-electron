@@ -1,0 +1,25 @@
+/* TEAM */
+    Developer: Giovanni Farina (GioFar)
+    Designer: Giovanni Farina (GioFar)
+    Contact: giofar.dev@gmail.com
+    GitHub: https://github.com/GioFar81
+    Twitter: @farigiovanni
+    Website: [https://your-website.com]
+
+/* SITE */
+    Last Update: YYYY-MM-DD
+    Standards: HTML5, CSS3, ES6
+    Software: React, Vite, TailwindCSS
+    Components: jQuery, Bootstrap
+    Hosting: [Your Hosting Provider]
+
+/* TECHNOLOGY */
+    Front-end built using: HTML, CSS, JavaScript
+    Back-end: Node.js, Express.js
+
+/* THANKS */
+    Thanks to all contributors and open-source projects!
+    MDN Web Docs: For the amazing documentation
+
+/* NOTE */
+    This file format was inspired by humans.txt: http://humanstxt.org

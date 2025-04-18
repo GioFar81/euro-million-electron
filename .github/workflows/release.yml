@@ -88,7 +88,7 @@ jobs:
           retention-days: 7
 
   create-release:
-    needs: [build-windows, build-linux, build-macos]
+    needs: [ build-windows, build-linux, build-macos ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -125,7 +125,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            artifacts/windows-build/**/*1.0.0*.exe
+            artifacts/windows-build/**/*${{ steps.get_version.outputs.VERSION }}*.exe
+            !artifacts/windows-build/**/Euromillion.Number.Generator.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
@@ -141,7 +142,8 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            artifacts/windows-build/**/*1.0.0*.exe
+            artifacts/windows-build/**/*${{ steps.get_version.outputs.VERSION }}*.exe
+            !artifacts/windows-build/**/Euromillion.Number.Generator.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
