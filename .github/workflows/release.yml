@@ -126,7 +126,6 @@ jobs:
           prerelease: false
           files: |
             artifacts/windows-build/**/*${{ steps.get_version.outputs.VERSION }}*.exe
-            !artifacts/windows-build/**/Euromillion.Number.Generator.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
@@ -143,7 +142,6 @@ jobs:
           prerelease: false
           files: |
             artifacts/windows-build/**/*${{ steps.get_version.outputs.VERSION }}*.exe
-            !artifacts/windows-build/**/Euromillion.Number.Generator.exe
             artifacts/linux-build/**/*.AppImage
             artifacts/linux-build/**/*.deb
             artifacts/macos-build/**/*.dmg
