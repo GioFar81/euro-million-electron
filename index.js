@@ -6,6 +6,9 @@ if (require("electron-squirrel-startup")) {
     app.quit();
 }
 
+// Enable sandbox by default
+app.enableSandbox();
+
 let mainWindow;
 
 const createWindow = () => {
@@ -16,6 +19,8 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
+            sandbox: true,
+            enableRemoteModule: false,
         },
     });
 

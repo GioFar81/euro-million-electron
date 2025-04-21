@@ -1,4 +1,10 @@
-# Release Notes for v1.0.0
+# Release Notes for v1.0.1
+
+## What's New
+- Fixed sandbox support for Linux AppImage, allowing it to run properly in Linux virtual machines without requiring the `--no-sandbox` flag
+- Improved Linux desktop integration with better metadata
+
+## Previous Release (v1.0.0)
 
 ## What's New
 - Initial release of the Euromillion Number Generator
