@@ -47,16 +47,7 @@
         "linux": {
             "icon": "icons/Euromillion-logo.png",
             "target": ["AppImage", "deb"],
-            "category": "Utility",
-            "executableName": "euro-million-electron",
-            "desktop": {
-                "Name": "Euromillion Number Generator",
-                "Comment": "An Electron application that generates random numbers for the Euromillion lottery game",
-                "Terminal": "false",
-                "Type": "Application"
-            },
-            "asarUnpack": [],
-            "artifactName": "${productName}-${version}.${ext}"
+            "category": "Utility"
         },
         "mac": {
             "icon": "icons/Euromillion-logo.icns"

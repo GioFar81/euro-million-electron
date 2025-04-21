@@ -51,25 +51,6 @@ The built applications will be available in the `dist` directory.
 - **macOS**: DMG (.dmg) and ZIP (.zip)
 - **Linux**: AppImage (.AppImage) and Debian package (.deb)
 
-### Linux-specific Notes
-
-The application is configured to run with the Electron sandbox enabled, which is the recommended security practice. If you encounter any issues running the AppImage in a Linux virtual machine, try the following:
-
-1. Make sure the AppImage has executable permissions:
-   ```bash
-   chmod +x Euromillion-Number-Generator-*.AppImage
-   ```
-
-2. Run the AppImage directly:
-   ```bash
-   ./Euromillion-Number-Generator-*.AppImage
-   ```
-
-3. If you still encounter issues, you can temporarily disable the sandbox (not recommended for regular use):
-   ```bash
-   ./Euromillion-Number-Generator-*.AppImage --no-sandbox
-   ```
-
 ## Development
 
 This project follows the gitflow workflow:

@@ -5,8 +5,6 @@
 - Generate up to five lines of Euromillion numbers
 - Each line contains five unique numbers (1–50) and two lucky stars (1–12)
 - Numbers are displayed in ascending order
-- Fixed sandbox support for Linux AppImage, allowing it to run properly in Linux virtual machines without requiring the `--no-sandbox` flag
-- Improved Linux desktop integration with better metadata
 
 ## Features
 - Simple and intuitive user interface
