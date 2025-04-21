@@ -1,6 +1,6 @@
 {
     "name": "euro-million-electron",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "author": "Giovanni Farina <:dgiofar@giofar.dev>",
     "description": "An Electron application that generates random numbers for the Euromillion lottery game",
     "main": "index.js",
