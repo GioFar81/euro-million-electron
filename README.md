@@ -12,12 +12,64 @@ An Electron application that generates random numbers for the Euromillion lotter
     - Light mode
     - Dark mode
     - System preference (automatically matches your system's theme)
+- Probability-based number generation:
+    - Generate numbers based on historical data
+    - Choose between hot numbers (most frequent) and cold numbers (least frequent)
+    - Increase your chances by using statistical analysis
+- Statistics dashboard:
+    - View the most and least frequently drawn numbers
+    - See frequency and percentage statistics for each number
+    - Based on real historical Euromillion draw data
 
 ## Installation
 
 1. Clone this repository
 2. Install dependencies with `npm install`
 3. Start the application with `npm start`
+
+## Dependencies
+
+This application relies on the following dependencies:
+
+- **Electron**: Framework for building cross-platform desktop applications
+- **Electron Builder**: Tool for packaging and distributing Electron applications
+- **Axios**: Promise-based HTTP client for making API requests
+- **Electron Squirrel Startup**: Handles Squirrel events for Windows app startup
+
+The application also uses the [Euromillions API](https://github.com/pedro-mealha/euromillions-api) to retrieve historical draw data for probability-based number generation.
+
+## Usage
+
+### Random Number Generation
+
+1. Select the "Random Generation" tab (default)
+2. Choose how many lines you want to play (1-5)
+3. Click "Generate Random Numbers"
+4. Your randomly generated Euromillion numbers will be displayed
+
+### Probability-Based Number Generation
+
+1. Select the "Probability-Based" tab
+2. Choose your number selection strategy:
+   - **Hot Numbers**: Uses the most frequently drawn numbers from historical data
+   - **Cold Numbers**: Uses the least frequently drawn numbers from historical data
+3. Choose how many lines you want to play (1-5)
+4. Click "Generate Based on Probability"
+5. Your probability-based Euromillion numbers will be displayed
+
+> **Note:** The first time you use this feature, the application will download historical data from the Euromillion API. This may take a few moments.
+
+### Statistics Dashboard
+
+1. Select the "Statistics" tab
+2. View the most frequently drawn numbers (Hot Numbers) and their statistics
+3. View the least frequently drawn numbers (Cold Numbers) and their statistics
+4. Statistics include:
+   - The number itself
+   - How many times it has been drawn
+   - The percentage of draws it has appeared in
+
+The statistics are based on real historical Euromillion draw data and are updated each time you start the application.
 
 ## Building for Distribution
 
@@ -64,6 +116,7 @@ This project follows the gitflow workflow:
 - `index.html`: Main HTML file
 - `styles.css`: CSS styles for the application
 - `index.js`: Electron application entry point
+- `euromillions-api.js`: API integration and probability calculation logic
 
 ## Continuous Integration
 

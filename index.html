@@ -13,21 +13,97 @@
             <div class="theme-option" data-theme="system">System Preference</div>
         </div>
         <div class="container">
-            <div class="form-group">
-                <label for="lineCount">How many lines do you want to play?</label>
-                <select id="lineCount">
-                    <option value="1">1 Line</option>
-                    <option value="2">2 Lines</option>
-                    <option value="3">3 Lines</option>
-                    <option value="4">4 Lines</option>
-                    <option value="5">5 Lines</option>
-                </select>
+            <div class="tabs">
+                <div class="tab active" data-tab="random">Random Generation</div>
+                <div class="tab" data-tab="probability">Probability-Based</div>
+                <div class="tab" data-tab="statistics">Statistics</div>
             </div>
-            <button id="generateBtn">Generate Numbers</button>
-            <div id="results" class="results"></div>
+            
+            <div class="tab-content active" id="random-tab">
+                <div class="form-group">
+                    <label for="lineCount">How many lines do you want to play?</label>
+                    <select id="lineCount">
+                        <option value="1">1 Line</option>
+                        <option value="2">2 Lines</option>
+                        <option value="3">3 Lines</option>
+                        <option value="4">4 Lines</option>
+                        <option value="5">5 Lines</option>
+                    </select>
+                </div>
+                <button id="generateBtn">Generate Random Numbers</button>
+                <div id="results" class="results"></div>
+            </div>
+            
+            <div class="tab-content" id="probability-tab">
+                <div class="form-group">
+                    <label for="probabilityType">Number Selection Strategy:</label>
+                    <select id="probabilityType">
+                        <option value="hot">Hot Numbers (Most Frequent)</option>
+                        <option value="cold">Cold Numbers (Least Frequent)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="probabilityLineCount">How many lines do you want to play?</label>
+                    <select id="probabilityLineCount">
+                        <option value="1">1 Line</option>
+                        <option value="2">2 Lines</option>
+                        <option value="3">3 Lines</option>
+                        <option value="4">4 Lines</option>
+                        <option value="5">5 Lines</option>
+                    </select>
+                </div>
+                <button id="generateProbabilityBtn" disabled>Generate Based on Probability</button>
+                <div id="loadingMessage" class="loading-message">Loading historical data...</div>
+                <div id="probabilityResults" class="results"></div>
+            </div>
+            
+            <div class="tab-content" id="statistics-tab">
+                <div id="statsLoading" class="loading-message">Loading statistics...</div>
+                <div id="statsContent" style="display: none;">
+                    <div class="stats-section">
+                        <h3>Hot Numbers (Most Frequent)</h3>
+                        <div class="stats-container">
+                            <div class="stats-column">
+                                <h4>Numbers (1-50)</h4>
+                                <div id="hotNumbersList" class="stats-list"></div>
+                            </div>
+                            <div class="stats-column">
+                                <h4>Stars (1-12)</h4>
+                                <div id="hotStarsList" class="stats-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3>Cold Numbers (Least Frequent)</h3>
+                        <div class="stats-container">
+                            <div class="stats-column">
+                                <h4>Numbers (1-50)</h4>
+                                <div id="coldNumbersList" class="stats-list"></div>
+                            </div>
+                            <div class="stats-column">
+                                <h4>Stars (1-12)</h4>
+                                <div id="coldStarsList" class="stats-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-info">
+                        <p>Based on <span id="totalDraws">0</span> historical draws</p>
+                        <p class="last-updated">Last updated: <span id="lastUpdated">-</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script>
+            // Import the euromillions-api module
+            const euroApi = require('./euromillions-api.js');
+            
+            // Global variables
+            let allDraws = [];
+            let statistics = null;
+            
             // Theme management
             const themeOptions = document.querySelectorAll('.theme-option');
             const THEME_KEY = 'euromillion-theme';
@@ -88,6 +164,123 @@
 
             // Initialize theme
             initTheme();
+            
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to selected tab and content
+                    tab.classList.add('active');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Load data if needed
+                    if (tabId === 'probability' || tabId === 'statistics') {
+                        loadHistoricalData();
+                    }
+                });
+            });
+
+            // Function to load historical data
+            async function loadHistoricalData() {
+                if (allDraws.length === 0) {
+                    try {
+                        document.getElementById('loadingMessage').style.display = 'block';
+                        document.getElementById('generateProbabilityBtn').disabled = true;
+                        document.getElementById('statsLoading').style.display = 'block';
+                        document.getElementById('statsContent').style.display = 'none';
+                        
+                        allDraws = await euroApi.getAllDraws();
+                        statistics = euroApi.getNumberStatistics(allDraws);
+                        
+                        document.getElementById('loadingMessage').style.display = 'none';
+                        document.getElementById('generateProbabilityBtn').disabled = false;
+                        
+                        // Update statistics tab
+                        updateStatistics(statistics);
+                    } catch (error) {
+                        console.error('Error loading historical data:', error);
+                        document.getElementById('loadingMessage').textContent = 'Error loading data. Please try again.';
+                        document.getElementById('statsLoading').textContent = 'Error loading data. Please try again.';
+                    }
+                }
+            }
+            
+            // Function to update statistics display
+            function updateStatistics(stats) {
+                // Update total draws
+                document.getElementById('totalDraws').textContent = stats.totalDraws;
+                
+                // Update last updated time
+                document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+                
+                // Update hot numbers list
+                const hotNumbersList = document.getElementById('hotNumbersList');
+                hotNumbersList.innerHTML = '';
+                stats.hotNumbers.numbers.forEach((num, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'stat-item';
+                    listItem.innerHTML = `
+                        <span class="stat-number">${num}</span>
+                        <span class="stat-frequency">${stats.hotNumbers.frequencies[index]} times</span>
+                        <span class="stat-percentage">(${stats.hotNumbers.percentages[index]}%)</span>
+                    `;
+                    hotNumbersList.appendChild(listItem);
+                });
+                
+                // Update hot stars list
+                const hotStarsList = document.getElementById('hotStarsList');
+                hotStarsList.innerHTML = '';
+                stats.hotStars.numbers.forEach((star, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'stat-item';
+                    listItem.innerHTML = `
+                        <span class="stat-number">${star}</span>
+                        <span class="stat-frequency">${stats.hotStars.frequencies[index]} times</span>
+                        <span class="stat-percentage">(${stats.hotStars.percentages[index]}%)</span>
+                    `;
+                    hotStarsList.appendChild(listItem);
+                });
+                
+                // Update cold numbers list
+                const coldNumbersList = document.getElementById('coldNumbersList');
+                coldNumbersList.innerHTML = '';
+                stats.coldNumbers.numbers.forEach((num, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'stat-item';
+                    listItem.innerHTML = `
+                        <span class="stat-number">${num}</span>
+                        <span class="stat-frequency">${stats.coldNumbers.frequencies[index]} times</span>
+                        <span class="stat-percentage">(${stats.coldNumbers.percentages[index]}%)</span>
+                    `;
+                    coldNumbersList.appendChild(listItem);
+                });
+                
+                // Update cold stars list
+                const coldStarsList = document.getElementById('coldStarsList');
+                coldStarsList.innerHTML = '';
+                stats.coldStars.numbers.forEach((star, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'stat-item';
+                    listItem.innerHTML = `
+                        <span class="stat-number">${star}</span>
+                        <span class="stat-frequency">${stats.coldStars.frequencies[index]} times</span>
+                        <span class="stat-percentage">(${stats.coldStars.percentages[index]}%)</span>
+                    `;
+                    coldStarsList.appendChild(listItem);
+                });
+                
+                // Show statistics content
+                document.getElementById('statsLoading').style.display = 'none';
+                document.getElementById('statsContent').style.display = 'block';
+            }
 
             // Function to generate random unique numbers
             function generateUniqueNumbers(min, max, count) {
@@ -112,43 +305,65 @@
 
                 for (let i = 0; i < lineCount; i++) {
                     const { numbers, stars } = generateEuromillionNumbers();
-
-                    const lineDiv = document.createElement('div');
-                    lineDiv.className = 'line';
-
-                    const lineLabel = document.createElement('div');
-                    lineLabel.className = 'line-label';
-                    lineLabel.textContent = `Line ${i + 1}`;
-                    lineDiv.appendChild(lineLabel);
-
-                    const numbersDiv = document.createElement('div');
-                    numbersDiv.className = 'numbers';
-                    numbers.forEach(num => {
-                        const numberSpan = document.createElement('span');
-                        numberSpan.className = 'number';
-                        numberSpan.textContent = num;
-                        numbersDiv.appendChild(numberSpan);
-                    });
-                    lineDiv.appendChild(numbersDiv);
-
-                    const starsDiv = document.createElement('div');
-                    starsDiv.className = 'stars';
-                    stars.forEach(star => {
-                        const starSpan = document.createElement('span');
-                        starSpan.className = 'star';
-                        starSpan.textContent = star;
-                        starsDiv.appendChild(starSpan);
-                    });
-                    lineDiv.appendChild(starsDiv);
-
-                    resultsDiv.appendChild(lineDiv);
+                    displayLine(resultsDiv, numbers, stars, i + 1);
                 }
             }
+            
+            // Function to display probability-based results
+            function displayProbabilityResults(lineCount, useHot) {
+                const resultsDiv = document.getElementById('probabilityResults');
+                resultsDiv.innerHTML = '';
+                
+                for (let i = 0; i < lineCount; i++) {
+                    const { numbers, stars } = euroApi.generateProbabilityBasedNumbers(useHot, allDraws);
+                    displayLine(resultsDiv, numbers, stars, i + 1);
+                }
+            }
+            
+            // Function to display a single line of numbers
+            function displayLine(container, numbers, stars, lineNumber) {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'line';
 
-            // Event listener for the generated button
+                const lineLabel = document.createElement('div');
+                lineLabel.className = 'line-label';
+                lineLabel.textContent = `Line ${lineNumber}`;
+                lineDiv.appendChild(lineLabel);
+
+                const numbersDiv = document.createElement('div');
+                numbersDiv.className = 'numbers';
+                numbers.forEach(num => {
+                    const numberSpan = document.createElement('span');
+                    numberSpan.className = 'number';
+                    numberSpan.textContent = num;
+                    numbersDiv.appendChild(numberSpan);
+                });
+                lineDiv.appendChild(numbersDiv);
+
+                const starsDiv = document.createElement('div');
+                starsDiv.className = 'stars';
+                stars.forEach(star => {
+                    const starSpan = document.createElement('span');
+                    starSpan.className = 'star';
+                    starSpan.textContent = star;
+                    starsDiv.appendChild(starSpan);
+                });
+                lineDiv.appendChild(starsDiv);
+
+                container.appendChild(lineDiv);
+            }
+
+            // Event listener for the random generation button
             document.getElementById('generateBtn').addEventListener('click', () => {
                 const lineCount = parseInt(document.getElementById('lineCount').value);
                 displayResults(lineCount);
+            });
+            
+            // Event listener for the probability-based generation button
+            document.getElementById('generateProbabilityBtn').addEventListener('click', () => {
+                const lineCount = parseInt(document.getElementById('probabilityLineCount').value);
+                const useHot = document.getElementById('probabilityType').value === 'hot';
+                displayProbabilityResults(lineCount, useHot);
             });
 
             // Generate initial results
