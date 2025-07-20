@@ -89,3 +89,5 @@ node_modules/
 
 # Build output
 dist/
+/guidelines-assessment.md
+/guidelines-recommendation.md
