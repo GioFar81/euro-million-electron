@@ -4,7 +4,7 @@ An Electron application that generates random numbers for the Euromillion lotter
 
 ## Features
 
-- Generate one to five lines of Euromillion numbers
+- Generate one to seven lines of Euromillion numbers
 - Each line contains five unique numbers (1–50) and two lucky stars (1–12)
 - Numbers are displayed in ascending order
 - Simple and intuitive user interface
@@ -43,7 +43,7 @@ The application also uses the [Euromillions API](https://github.com/pedro-mealha
 ### Random Number Generation
 
 1. Select the "Random Generation" tab (default)
-2. Choose how many lines you want to play (1-5)
+2. Choose how many lines you want to play (1-7)
 3. Click "Generate Random Numbers"
 4. Your randomly generated Euromillion numbers will be displayed
 
@@ -53,7 +53,7 @@ The application also uses the [Euromillions API](https://github.com/pedro-mealha
 2. Choose your number selection strategy:
    - **Hot Numbers**: Uses the most frequently drawn numbers from historical data
    - **Cold Numbers**: Uses the least frequently drawn numbers from historical data
-3. Choose how many lines you want to play (1-5)
+3. Choose how many lines you want to play (1-7)
 4. Click "Generate Based on Probability"
 5. Your probability-based Euromillion numbers will be displayed
 
