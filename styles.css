@@ -32,7 +32,7 @@
     --menu-header-border: #eee;
 }
 
-[data-theme="dark"] {
+body[data-theme="dark"] {
     --bg-color: #222;
     --text-color: #f5f5f5;
     --container-bg: #333;
@@ -458,4 +458,9 @@ button:disabled:hover {
     border: 1px solid var(--select-border);
     transition: all 0.3s ease;
     text-align: left;
+}
+
+.side-menu .theme-option:hover {
+    background-color: var(--tab-hover-bg);
+    border-color: var(--button-bg);
 }
