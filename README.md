@@ -35,6 +35,7 @@ This application relies on the following dependencies:
 - **Electron Builder**: Tool for packaging and distributing Electron applications
 - **Axios**: Promise-based HTTP client for making API requests
 - **Electron Squirrel Startup**: Handles Squirrel events for Windows app startup
+- **Jest**: JavaScript testing framework for unit and integration testing
 
 The application also uses the [Euromillions API](https://github.com/pedro-mealha/euromillions-api) to retrieve historical draw data for probability-based number generation.
 
@@ -117,6 +118,63 @@ This project follows the gitflow workflow:
 - `styles.css`: CSS styles for the application
 - `index.js`: Electron application entry point
 - `euromillions-api.js`: API integration and probability calculation logic
+- `__tests__/`: Directory containing test files
+
+## Testing
+
+This project uses Jest as its testing framework. Tests are located in the `__tests__` directory and follow the naming convention `*.test.js` or `*.spec.js`.
+
+### Running Tests
+
+To run all tests:
+
+```bash
+npm test
+```
+
+To run tests with coverage reporting:
+
+```bash
+npm run test:coverage
+```
+
+### Test Structure
+
+Tests are organized to mirror the structure of the source code:
+
+- API tests: Tests for the Euromillions API integration
+- UI tests: Tests for the user interface components (when applicable)
+- Integration tests: Tests that verify different parts of the application work together
+
+### Writing Tests
+
+When writing tests, follow these guidelines:
+
+- Group related tests using `describe` blocks
+- Use clear, descriptive test names that explain what is being tested
+- Test both success and failure cases
+- Mock external dependencies (like API calls) to isolate the code being tested
+- Aim for high test coverage, especially for critical functionality
+
+Example test structure:
+
+```javascript
+describe('Feature or Component Name', () => {
+  beforeEach(() => {
+    // Setup code
+  });
+
+  test('should do something specific', () => {
+    // Test code
+    expect(result).toBe(expectedValue);
+  });
+
+  test('should handle errors properly', () => {
+    // Test error handling
+    expect(() => functionThatThrows()).toThrow();
+  });
+});
+```
 
 ## Continuous Integration
 
