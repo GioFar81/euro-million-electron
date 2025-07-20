@@ -8,7 +8,8 @@ An Electron application that generates random numbers for the Euromillion lotter
 - Each line contains five unique numbers (1–50) and two lucky stars (1–12)
 - Numbers are displayed in ascending order
 - Simple and intuitive user interface
-- Theme switching:
+- Hamburger menu for additional options
+- Theme switching (accessible from the hamburger menu):
     - Light mode
     - Dark mode
     - System preference (automatically matches your system's theme)
@@ -71,6 +72,16 @@ The application also uses the [Euromillions API](https://github.com/pedro-mealha
    - The percentage of draws it has appeared in
 
 The statistics are based on real historical Euromillion draw data and are updated each time you start the application.
+
+### Theme Switching
+
+1. Click the hamburger menu icon in the top right corner of the application
+2. In the side menu that appears, find the "Theme" section
+3. Select your preferred theme:
+   - **Light Mode**: Bright theme with light backgrounds
+   - **Dark Mode**: Dark theme with reduced brightness for low-light environments
+   - **System Preference**: Automatically matches your system's theme settings
+4. The theme will be applied immediately and your preference will be saved for future sessions
 
 ## Building for Distribution
 

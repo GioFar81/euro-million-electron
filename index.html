@@ -6,12 +6,35 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <h1>Euromillion Number Generator</h1>
-        <div class="theme-switcher">
-            <div class="theme-option" data-theme="light">Light Mode</div>
-            <div class="theme-option" data-theme="dark">Dark Mode</div>
-            <div class="theme-option" data-theme="system">System Preference</div>
+        <div class="header">
+            <h1>Euromillion Number Generator</h1>
+            <div class="hamburger-menu">
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
+        
+        <div class="side-menu">
+            <div class="side-menu-header">
+                <div class="close-menu">&times;</div>
+                <h3>Menu</h3>
+            </div>
+            <div class="side-menu-content">
+                <div class="menu-section">
+                    <h4>Theme</h4>
+                    <div class="theme-switcher">
+                        <div class="theme-option" data-theme="light">Light Mode</div>
+                        <div class="theme-option" data-theme="dark">Dark Mode</div>
+                        <div class="theme-option" data-theme="system">System Preference</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overlay"></div>
         <div class="container">
             <div class="tabs">
                 <div class="tab active" data-tab="random">Random Generation</div>
@@ -168,6 +191,38 @@
 
             // Initialize theme
             initTheme();
+            
+            // Side menu functionality
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const closeMenu = document.querySelector('.close-menu');
+            const sideMenu = document.querySelector('.side-menu');
+            const overlay = document.querySelector('.overlay');
+            
+            // Function to open the menu
+            function openMenu() {
+                sideMenu.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            }
+            
+            // Function to close the menu
+            function closeMenuFunc() {
+                sideMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+            
+            // Event listeners for menu toggle
+            hamburgerMenu.addEventListener('click', openMenu);
+            closeMenu.addEventListener('click', closeMenuFunc);
+            overlay.addEventListener('click', closeMenuFunc);
+            
+            // Close menu when a theme option is selected
+            themeOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    closeMenuFunc();
+                });
+            });
             
             // Tab switching functionality
             const tabs = document.querySelectorAll('.tab');

@@ -23,6 +23,13 @@
     --loading-color: #4CAF50;
     --disabled-button-bg: #cccccc;
     --disabled-button-color: #666666;
+    --hamburger-color: #333;
+    --side-menu-bg: white;
+    --side-menu-shadow: rgba(0, 0, 0, 0.2);
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --close-btn-color: #666;
+    --close-btn-hover: #333;
+    --menu-header-border: #eee;
 }
 
 [data-theme="dark"] {
@@ -49,6 +56,13 @@
     --loading-color: #4CAF50;
     --disabled-button-bg: #444;
     --disabled-button-color: #888;
+    --hamburger-color: #f5f5f5;
+    --side-menu-bg: #333;
+    --side-menu-shadow: rgba(0, 0, 0, 0.4);
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --close-btn-color: #aaa;
+    --close-btn-hover: #fff;
+    --menu-header-border: #444;
 }
 
 body {
@@ -314,4 +328,134 @@ button:disabled {
 
 button:disabled:hover {
     background-color: var(--disabled-button-bg);
+}
+
+/* Header and Hamburger Menu Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.hamburger-menu {
+    cursor: pointer;
+    padding: 10px;
+    z-index: 100;
+}
+
+.hamburger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--hamburger-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Side Menu Styles */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    background-color: var(--side-menu-bg);
+    box-shadow: -2px 0 5px var(--side-menu-shadow);
+    z-index: 1000;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.side-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--menu-header-border);
+}
+
+.side-menu-header h3 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.close-menu {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--close-btn-color);
+    transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--close-btn-hover);
+}
+
+.side-menu-content {
+    padding: 20px;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--menu-header-border);
+    padding-bottom: 5px;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Update Theme Switcher for Side Menu */
+.side-menu .theme-switcher {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 0;
+    gap: 10px;
+}
+
+.side-menu .theme-option {
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border: 1px solid var(--select-border);
+    transition: all 0.3s ease;
+    text-align: left;
 }
